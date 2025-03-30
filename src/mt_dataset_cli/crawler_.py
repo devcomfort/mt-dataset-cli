@@ -7,7 +7,7 @@ import re
 import abc
 import logging
 from typing import Dict, List, Optional, Union
-import requests
+import httpx
 from bs4 import BeautifulSoup
 
 logger = logging.getLogger(__name__)
@@ -48,9 +48,10 @@ class EuroparlCrawler(CrawlerStrategy):
         """
         # 메인 페이지 크롤링
         try:
-            response = requests.get(self.base_url)
-            response.raise_for_status()
-            soup = BeautifulSoup(response.text, "lxml")
+            with httpx.Client() as client:
+                response = client.get(self.base_url)
+                response.raise_for_status()
+                soup = BeautifulSoup(response.text, "lxml")
             
             urls = []
             
@@ -100,9 +101,10 @@ class NewsCommentaryCrawler(CrawlerStrategy):
             URL 정보 목록
         """
         try:
-            response = requests.get(self.base_url)
-            response.raise_for_status()
-            soup = BeautifulSoup(response.text, "lxml")
+            with httpx.Client() as client:
+                response = client.get(self.base_url)
+                response.raise_for_status()
+                soup = BeautifulSoup(response.text, "lxml")
             
             urls = []
             
@@ -158,9 +160,10 @@ class WMTCrawler(CrawlerStrategy):
             URL 정보 목록
         """
         try:
-            response = requests.get(self.base_url)
-            response.raise_for_status()
-            soup = BeautifulSoup(response.text, "lxml")
+            with httpx.Client() as client:
+                response = client.get(self.base_url)
+                response.raise_for_status()
+                soup = BeautifulSoup(response.text, "lxml")
             
             urls = []
             
@@ -181,9 +184,10 @@ class WMTCrawler(CrawlerStrategy):
             # 각 카테고리 페이지에서 데이터셋 파일 링크 찾기
             for cat, cat_url in category_links.items():
                 try:
-                    cat_response = requests.get(cat_url)
-                    cat_response.raise_for_status()
-                    cat_soup = BeautifulSoup(cat_response.text, "lxml")
+                    with httpx.Client() as client:
+                        cat_response = client.get(cat_url)
+                        cat_response.raise_for_status()
+                        cat_soup = BeautifulSoup(cat_response.text, "lxml")
                     
                     for link in cat_soup.find_all("a"):
                         href = link.get("href")
