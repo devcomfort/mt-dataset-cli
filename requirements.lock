@@ -10,23 +10,28 @@
 #   universal: false
 
 -e file:.
+anyio==4.9.0
+    # via httpx
 beautifulsoup4==4.13.3
-    # via statmt-downloader
+    # via mt-dataset-cli
 certifi==2025.1.31
-    # via requests
-charset-normalizer==3.4.1
-    # via requests
+    # via httpcore
+    # via httpx
+h11==0.14.0
+    # via httpcore
+httpcore==1.0.7
+    # via httpx
+httpx==0.28.1
+    # via mt-dataset-cli
 idna==3.10
-    # via requests
-lxml==5.3.1
-    # via statmt-downloader
-requests==2.32.3
-    # via statmt-downloader
+    # via anyio
+    # via httpx
+sniffio==1.3.1
+    # via anyio
 soupsieve==2.6
     # via beautifulsoup4
 tqdm==4.67.1
-    # via statmt-downloader
+    # via mt-dataset-cli
 typing-extensions==4.13.0
+    # via anyio
     # via beautifulsoup4
-urllib3==2.3.0
-    # via requests
