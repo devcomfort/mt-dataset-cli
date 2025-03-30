@@ -15,3 +15,8 @@ class WebParser(ABC):
     def parse(self):
         """Parse the web page and return a list of URLs"""
         pass
+
+    @abstractmethod
+    def walk(self):
+        """Walk the web page and return a list of URLs"""
+        pass
