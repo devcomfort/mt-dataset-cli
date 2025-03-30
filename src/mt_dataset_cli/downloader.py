@@ -7,13 +7,12 @@ import json
 import logging
 import threading
 import concurrent.futures
-from typing import Dict, List, Optional, Set, Tuple, Union, Callable
-from pathlib import Path
+from typing import Dict, List, Optional, Union, Callable
 
-import requests
+import httpx
 from tqdm import tqdm
 
-from .crawler import CrawlerFactory, CrawlerStrategy
+from .crawler_ import CrawlerFactory
 from .utils import extract_archive
 
 logger = logging.getLogger(__name__)
@@ -93,14 +92,14 @@ class Downloader:
         logger.info(f"다운로드 중: {url} -> {output_path}")
         
         try:
-            with requests.get(url, stream=True) as response:
+            with httpx.stream("GET", url, follow_redirects=True) as response:
                 response.raise_for_status()
                 total_size = int(response.headers.get("content-length", 0))
                 
                 with open(output_path, "wb") as f, tqdm(
                     total=total_size, unit="B", unit_scale=True, desc=filename
                 ) as progress_bar:
-                    for chunk in response.iter_content(chunk_size=8192):
+                    for chunk in response.iter_bytes(chunk_size=8192):
                         if chunk:
                             f.write(chunk)
                             progress_bar.update(len(chunk))
