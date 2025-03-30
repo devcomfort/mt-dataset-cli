@@ -1,0 +1,28 @@
+{
+  "datasets": [
+    {
+      "dataset_id": "europarl-v7",
+      "language_pair": "de-en",
+      "target_dir": "europarl/de-en"
+    },
+    {
+      "dataset_id": "europarl-v7",
+      "language_pair": "fr-en",
+      "target_dir": "europarl/fr-en"
+    },
+    {
+      "dataset_id": "news-commentary-v15",
+      "language_pair": "de-en",
+      "target_dir": "news-commentary/de-en"
+    },
+    {
+      "dataset_id": "un-corpus-v1.0",
+      "target_dir": "un-corpus"
+    },
+    {
+      "dataset_id": "wmt14",
+      "category": "training-parallel",
+      "target_dir": "wmt/training-parallel"
+    }
+  ]
+} 
