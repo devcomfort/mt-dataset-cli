@@ -26,9 +26,9 @@ class Downloader:
         Downloader 초기화
         
         Args:
-            cache_dir: 다운로드된 파일을 캐싱하는 디렉토리 (기본값: ~/.statmt_downloader/cache)
+            cache_dir: 다운로드된 파일을 캐싱하는 디렉토리 (기본값: ~/.mt_dataset_cli/cache)
         """
-        self.cache_dir = cache_dir or os.path.expanduser("~/.statmt_downloader/cache")
+        self.cache_dir = cache_dir or os.path.expanduser("~/.mt_dataset_cli/cache")
         os.makedirs(self.cache_dir, exist_ok=True)
         
         # 메타데이터 캐시 파일 경로
@@ -247,7 +247,7 @@ class StatMTDownloader:
         StatMTDownloader 초기화
         
         Args:
-            cache_dir: 다운로드된 파일을 캐싱하는 디렉토리 (기본값: ~/.statmt_downloader/cache)
+            cache_dir: 다운로드된 파일을 캐싱하는 디렉토리 (기본값: ~/.mt_dataset_cli/cache)
             max_workers: 최대 동시 다운로드 수
         """
         self.downloader = Downloader(cache_dir)

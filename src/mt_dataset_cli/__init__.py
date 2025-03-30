@@ -1,5 +1,5 @@
 """
-statmt-downloader 라이브러리
+mt-dataset-cli 라이브러리
 """
 
 from .downloader import StatMTDownloader

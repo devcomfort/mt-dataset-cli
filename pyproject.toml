@@ -1,5 +1,5 @@
 [project]
-name = "statmt-downloader"
+name = "mt-dataset-cli"
 version = "0.1.0"
 description = "statmt.org 데이터셋을 다운로드하기 위한 라이브러리"
 authors = [
@@ -15,7 +15,7 @@ readme = "README.md"
 requires-python = ">= 3.8"
 
 [project.scripts]
-statmt-downloader = "statmt_downloader.cli:main"
+mt-dataset-cli = "mt_dataset_cli.cli:main"
 
 [build-system]
 requires = ["hatchling"]
@@ -29,4 +29,4 @@ dev-dependencies = []
 allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/statmt_downloader"]
+packages = ["src/mt_dataset_cli"]

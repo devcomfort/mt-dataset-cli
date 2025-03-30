@@ -1,4 +1,4 @@
-# statmt-downloader
+# mt-dataset-cli
 
 statmt.org에 호스팅된 다양한 기계 번역 데이터셋을 쉽게 다운로드할 수 있는 파이썬 라이브러리입니다.
 
@@ -13,7 +13,7 @@ statmt.org에 호스팅된 다양한 기계 번역 데이터셋을 쉽게 다운
 ## 설치 방법
 
 ```bash
-pip install statmt-downloader
+pip install mt-dataset-cli
 ```
 
 ## 사용 방법
@@ -23,7 +23,7 @@ pip install statmt-downloader
 #### 단일 데이터셋 다운로드
 
 ```python
-from statmt_downloader import StatMTDownloader
+from mt_dataset_cli import StatMTDownloader
 
 # 다운로더 인스턴스 생성
 downloader = StatMTDownloader()
@@ -43,7 +43,7 @@ downloader.download(
 #### 여러 데이터셋 동시 다운로드
 
 ```python
-from statmt_downloader import StatMTDownloader
+from mt_dataset_cli import StatMTDownloader
 
 # 다운로더 인스턴스 생성 (최대 8개의 파일을 동시에 다운로드)
 downloader = StatMTDownloader(max_workers=8)
@@ -79,20 +79,20 @@ for dataset_id, files in results.items():
 #### 데이터셋 목록 보기
 
 ```bash
-statmt-downloader list
+mt-dataset-cli list
 ```
 
 #### 단일 데이터셋 다운로드
 
 ```bash
 # Europarl 데이터셋 다운로드
-statmt-downloader download europarl-v7 --language-pair de-en --output-dir ./data
+mt-dataset-cli download europarl-v7 --language-pair de-en --output-dir ./data
 
 # WMT 데이터셋의 특정 카테고리 다운로드
-statmt-downloader download wmt14 --category training-parallel --output-dir ./data
+mt-dataset-cli download wmt14 --category training-parallel --output-dir ./data
 
 # 다운로드 후 자동 압축 해제
-statmt-downloader download un-corpus-v1.0 --output-dir ./data --extract
+mt-dataset-cli download un-corpus-v1.0 --output-dir ./data --extract
 ```
 
 #### 여러 데이터셋 배치 다운로드
@@ -119,14 +119,14 @@ statmt-downloader download un-corpus-v1.0 --output-dir ./data --extract
 배치 다운로드 실행:
 
 ```bash
-statmt-downloader batch config.json --output-dir ./data --extract
+mt-dataset-cli batch config.json --output-dir ./data --extract
 ```
 
 #### 캐시 관리
 
 ```bash
 # 캐시 정보 표시
-statmt-downloader cache --show
+mt-dataset-cli cache --show
 ```
 
 ## 지원하는 데이터셋
@@ -141,7 +141,7 @@ statmt-downloader cache --show
 새로운 데이터셋 크롤러를 추가하려면 `CrawlerStrategy` 인터페이스를 구현하고 `CrawlerFactory`에 등록하면 됩니다:
 
 ```python
-from statmt_downloader.crawler import CrawlerStrategy
+from mt_dataset_cli.crawler import CrawlerStrategy
 
 class MyCustomCrawler(CrawlerStrategy):
     def get_dataset_urls(self, **kwargs):
@@ -151,7 +151,7 @@ class MyCustomCrawler(CrawlerStrategy):
         ]
 
 # CrawlerFactory에 등록
-from statmt_downloader.crawler import CrawlerFactory
+from mt_dataset_cli.crawler import CrawlerFactory
 CrawlerFactory.CRAWLERS["my-dataset"] = MyCustomCrawler
 ```
 

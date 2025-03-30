@@ -33,7 +33,7 @@ def parse_args(args: Optional[List[str]] = None) -> argparse.Namespace:
     """
     parser = argparse.ArgumentParser(
         description="statmt.org에서 기계 번역 데이터셋 다운로드",
-        epilog="예시: statmt-downloader download europarl-v7 --language-pair de-en --output-dir ./data"
+        epilog="예시: mt-dataset-cli download europarl-v7 --language-pair de-en --output-dir ./data"
     )
     
     subparsers = parser.add_subparsers(dest="command", help="명령")
