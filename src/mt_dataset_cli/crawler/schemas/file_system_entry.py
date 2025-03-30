@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-
+from typing import Literal
 @dataclass
 class FileSystemEntry:
     """웹 크롤링된 파일/디렉토리 요소를 나타내는 데이터 클래스
@@ -16,3 +16,4 @@ class FileSystemEntry:
     filename: str
     last_modified: str
     description: str
+    type: Literal["file", "directory"]

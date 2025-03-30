@@ -80,6 +80,7 @@ class ApacheHttpServerParser(WebParser):
                     filename = ''
                     url = ''
 
+                type_ = "file" if url.endswith('/') else "directory"
                 last_modified = cols[2].text.strip()
                 size = cols[3].text.strip()
                 description = cols[4].text.strip()
@@ -89,7 +90,8 @@ class ApacheHttpServerParser(WebParser):
                     filename=filename,
                     last_modified=last_modified,
                     size=size,
-                    description=description
+                    description=description,
+                    type=type_
                 )
                 elements.append(element)
                 
