@@ -12,6 +12,8 @@
 -e file:.
 anyio==4.9.0
     # via httpx
+asyncio==3.4.3
+    # via mt-dataset-cli
 beautifulsoup4==4.13.3
     # via mt-dataset-cli
 certifi==2025.1.31
