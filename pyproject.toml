@@ -1,22 +1,23 @@
 [project]
-name = "mt-dataset-cli"
+name = "mt-dataset-downloader"
 version = "0.1.0"
-description = "statmt.org 데이터셋을 다운로드하기 위한 라이브러리"
+description = "statmt.org 기계번역 데이터셋을 다운로드하고 크롤링하기 위한 라이브러리"
 authors = [
     { name = "devcomfort", email = "im@devcomfort.me" }
 ]
+readme = "README.md"
+requires-python = ">= 3.8"
 dependencies = [
     "tqdm",
     "beautifulsoup4",
     "httpx>=0.28.1",
     "lxml>=5.3.1",
     "asyncio>=3.4.3",
+    "rich>=14.0.0",
 ]
-readme = "README.md"
-requires-python = ">= 3.8"
 
-[project.scripts]
-mt-dataset-cli = "mt_dataset_cli.cli:main"
+[project.optional-dependencies]
+rich = ["rich>=13.5.0"]
 
 [build-system]
 requires = ["hatchling"]
@@ -24,10 +25,22 @@ build-backend = "hatchling.build"
 
 [tool.rye]
 managed = true
-dev-dependencies = []
+dev-dependencies = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.5",
+    "pytest-mock>=3.12.0",
+    "pytest-cov>=4.1.0",
+]
 
 [tool.hatch.metadata]
 allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/mt_dataset_cli"]
+packages = ["src/mt_dataset_downloader"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+asyncio_mode = "auto"
