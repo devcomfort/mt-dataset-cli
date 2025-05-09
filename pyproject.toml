@@ -1,46 +1,80 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "mt-dataset-downloader"
 version = "0.1.0"
-description = "statmt.org 기계번역 데이터셋을 다운로드하고 크롤링하기 위한 라이브러리"
-authors = [
-    { name = "devcomfort", email = "im@devcomfort.me" }
-]
+description = "기계 번역 데이터셋 다운로드 도구"
 readme = "README.md"
-requires-python = ">= 3.8"
+authors = [
+    {name = "devcomfort", email = "im@devcomfort.me"}
+]
+license = {text = "MIT"}
+requires-python = ">=3.7"
 dependencies = [
-    "tqdm",
-    "beautifulsoup4",
-    "httpx>=0.28.1",
-    "lxml>=5.3.1",
-    "asyncio>=3.4.3",
-    "rich>=14.0.0",
+    "requests>=2.32.3",
+    "tqdm>=4.67.1",
+    "aiohttp>=3.8.0",
+    "beautifulsoup4>=4.11.0",
+    "lxml>=4.9.0",
+    "pyyaml>=6.0",
+    "inquirer>=2.10.0",
+    "dataclasses-json>=0.5.7",
+    "transformers>=4.30.0",
+    "accelerate>=0.20.0",
+    "pipe>=2.2",
+    "toolz>=1.0.0",
+    "smolagents[openai]>=1.14.0",
+    "langfuse>=2.60.4",
+    "openai>=1.78.0",
+    "helicone-prompts>=0.0.1",
+    "openinference-instrumentation-openai>=0.1.27",
+    "arize-phoenix-otel>=0.9.2",
+    "arize-phoenix-client>=1.4.0",
 ]
 
 [project.optional-dependencies]
-rich = ["rich>=13.5.0"]
-
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
-[tool.rye]
-managed = true
-dev-dependencies = [
-    "pytest>=8.0.0",
-    "pytest-asyncio>=0.23.5",
-    "pytest-mock>=3.12.0",
-    "pytest-cov>=4.1.0",
+onnx = [
+    "onnxruntime>=1.14.0",
+    "optimum>=1.10.0",
+]
+llama-cpp = [
+    "llama-cpp-python>=0.1.77",
+]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "mypy>=1.0.0",
+]
+all = [
+    "mt-dataset-downloader[onnx,llama-cpp,dev]",
 ]
 
-[tool.hatch.metadata]
-allow-direct-references = true
+[project.urls]
+Repository = "https://github.com/username/mt-dataset-downloader"
+Documentation = "https://github.com/username/mt-dataset-downloader"
 
-[tool.hatch.build.targets.wheel]
-packages = ["src/mt_dataset_downloader"]
+[project.scripts]
+mt-download = "mt_dataset_downloader.cli.main:main"
+
+[tool.black]
+line-length = 88
+target-version = ['py37', 'py38', 'py39', 'py310']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.mypy]
+python_version = "3.7"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-python_files = ["test_*.py"]
-python_classes = ["Test*"]
-python_functions = ["test_*"]
-asyncio_mode = "auto"
+python_files = "test_*.py"
